@@ -1,0 +1,51 @@
+<h1>Skate Park</h1>
+
+<div class="py-5">
+    <h2>Iniciar Sesión</h2>
+    <hr class="w-50" />
+
+    <div id="alerta" class="alert alert-danger d-none" role="alert">
+        Por favor, completa todos los campos requeridos.
+    </div>
+    <form id="formLogin">
+        <div class="form-group">
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" class="form-control w-50 m-auto" name="email" />
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" class="form-control w-50 m-auto" name="password" />
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success mb-3">Ingresar</button>
+        <p>¿Aún no tienes cuenta? <a href="/registrar">Regístrate</a></p>
+    </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    const loginForm = document.querySelector('#formLogin')
+    loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault()
+        const email = e.target.email.value
+        const password = e.target.password.value
+        try {
+            const { data } = await axios.post('/login', {
+                email, password
+            })
+            console.log(data)
+
+            localStorage.setItem('token', data.msg.token)
+            console.log(data.msg.role_id)
+            if (data.msg.role_id === 1) {
+                window.location.href = '/admin'
+
+                return
+            }
+            window.location.href = '/datos'
+        } catch (error) {
+            console.log(error)
+        }
+    })
+</script>
