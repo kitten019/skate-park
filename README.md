@@ -31,6 +31,7 @@ INSERT INTO skaters (email, nombre, password, anos_experiencia, especialidad, fo
 select * from skaters;
 
 ```
+2. Modificar la clave y el usuario en el archivo .env de acuerdo a los parámetros con los que desee utilizar este proyecto en PostgresSQL
 
 ## Instrucciones para Ejecutar el Proyecto
 
